@@ -4,7 +4,7 @@ A mobile-first marketing site for **MX Electric Inc.**, a veteran-owned electric
 contractor in Ogden, Illinois serving Champaign, Urbana and surrounding Central
 Illinois.
 
-Built with **Next.js 15 (App Router)**, **TypeScript** and **Tailwind CSS**, and
+Built with **Next.js 16 (App Router)**, **TypeScript** and **Tailwind CSS**, and
 ready to deploy to Vercel with no additional configuration.
 
 ---
@@ -22,7 +22,7 @@ Other scripts:
 ```bash
 npm run build      # production build
 npm run start      # serve the production build
-npm run lint       # ESLint (next/core-web-vitals)
+npm run lint       # ESLint 9 flat config (next/core-web-vitals + next/typescript)
 npm run typecheck  # tsc --noEmit
 ```
 
@@ -133,6 +133,8 @@ Reusable components live in `src/components/`: `Header`, `Footer`, `Logo`,
 
 ## SEO notes
 
+- The favicon is `src/app/icon.svg` — a yellow bolt on black. Replace it with
+  the real logo mark when the client supplies one.
 - Every page is a **server component**; text content is in the server-rendered
   HTML, not gated behind client JavaScript. The three client components
   (header, reviews carousel, projects filter, lead form) still render their

@@ -21,10 +21,15 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
 
-  useEffect(() => {
+  // Close both menus when the route changes. Adjusting state during
+  // render (rather than in an effect) is React's recommended pattern
+  // here — it avoids a second render pass with the menu still open.
+  const [lastPath, setLastPath] = useState(pathname);
+  if (lastPath !== pathname) {
+    setLastPath(pathname);
     setOpen(false);
     setServicesOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
