@@ -9,7 +9,7 @@ import { PhoneIcon } from '@/components/Icons';
  */
 export function StickyMobileCTA() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-px border-t border-ink-800 bg-ink-800 pb-[env(safe-area-inset-bottom)] lg:hidden">
+    <div className="drawer-in fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-px border-t border-ink-800 bg-ink-800 pb-[env(safe-area-inset-bottom)] lg:hidden">
       <a
         href={business.phone.href}
         className="flex items-center justify-center gap-2 bg-volt-400 py-3.5 text-[13px] font-extrabold uppercase tracking-wider text-ink-950"

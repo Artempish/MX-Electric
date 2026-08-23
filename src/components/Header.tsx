@@ -205,7 +205,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        'flex h-11 items-center px-5 text-[13px] font-extrabold uppercase tracking-wider transition-colors',
+                        'link-underline flex h-11 items-center px-5 text-[13px] font-extrabold uppercase tracking-wider transition-colors',
                         active
                           ? 'bg-ink-900 text-volt-400'
                           : 'text-ink-900 hover:bg-ink-900 hover:text-volt-400',
@@ -224,7 +224,10 @@ export function Header() {
         <div
           id="mobile-menu"
           hidden={!open}
-          className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t-4 border-volt-400 bg-ink-950 lg:hidden"
+          className={cn(
+            'max-h-[calc(100dvh-4rem)] overflow-y-auto border-t-4 border-volt-400 bg-ink-950 lg:hidden',
+            open && 'drawer-in',
+          )}
         >
           <nav aria-label="Mobile" className="container-page py-4">
             <ul className="space-y-1">

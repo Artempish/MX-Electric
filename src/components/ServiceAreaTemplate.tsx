@@ -9,6 +9,7 @@ import { ServiceCard } from '@/components/ServiceCard';
 import { LeadForm } from '@/components/LeadForm';
 import { StatsBand } from '@/components/StatsBand';
 import { CTABand } from '@/components/CTABand';
+import { Reveal } from '@/components/Reveal';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
 import { CheckIcon } from '@/components/Icons';
@@ -55,7 +56,7 @@ export function ServiceAreaTemplate({ area }: { area: ServiceArea }) {
               ))}
             </div>
 
-            <div className="mt-9 rounded-lg border border-ink-100 bg-ink-50 p-6 sm:p-8">
+            <Reveal className="mt-9 rounded-lg border border-ink-100 bg-ink-50 p-6 sm:p-8">
               <h2 className="font-display text-xl font-extrabold uppercase tracking-wide text-ink-900">
                 What we see most in {area.city}
               </h2>
@@ -70,7 +71,7 @@ export function ServiceAreaTemplate({ area }: { area: ServiceArea }) {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
 
             <div className="mt-9">
               <h2 className="font-display text-xl font-extrabold uppercase tracking-wide text-ink-900">
@@ -102,8 +103,10 @@ export function ServiceAreaTemplate({ area }: { area: ServiceArea }) {
             eyebrow="Our services"
           />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {topServices.map((service) => (
-              <ServiceCard key={service.slug} service={service} variant="tile" />
+            {topServices.map((service, i) => (
+              <Reveal key={service.slug} delay={i * 80} className="h-full">
+                <ServiceCard service={service} variant="tile" />
+              </Reveal>
             ))}
           </div>
           <div className="mt-10 text-center">

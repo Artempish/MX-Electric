@@ -18,6 +18,7 @@ import { ImageSlot } from '@/components/ImageSlot';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { VideoEmbed } from '@/components/VideoEmbed';
 import { videos } from '@/data/videos';
+import { Reveal } from '@/components/Reveal';
 import { JsonLd } from '@/components/JsonLd';
 import { faqSchema, reviewSchema } from '@/lib/schema';
 import { PhoneIcon, ArrowIcon, CheckIcon } from '@/components/Icons';
@@ -79,14 +80,22 @@ export default function HomePage() {
         </div>
 
         <div className="container-page py-16 text-center sm:py-20 lg:py-28">
-          <TrustChips />
+          <div className="hero-in">
+            <TrustChips />
+          </div>
 
-          <h1 className="mx-auto mt-7 max-w-4xl font-display text-4xl font-black uppercase leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1
+            className="hero-in mx-auto mt-7 max-w-4xl font-display text-4xl font-black uppercase leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
+            style={{ animationDelay: '90ms' }}
+          >
             Central Illinois&apos; trusted
             <span className="mt-1 block text-volt-400">electricians</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink-200 sm:text-lg">
+          <p
+            className="hero-in mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink-200 sm:text-lg"
+            style={{ animationDelay: '180ms' }}
+          >
             Veteran-owned and operating since {business.foundedYear}, with 25+
             years of combined field experience. Calls returned quickly, work
             done right the first time, and a crew that cleans up before it
@@ -94,7 +103,10 @@ export default function HomePage() {
           </p>
 
           {/* Hero stat boxes */}
-          <dl className="mx-auto mt-9 grid max-w-2xl grid-cols-3 gap-2 sm:gap-4">
+          <dl
+            className="hero-in mx-auto mt-9 grid max-w-2xl grid-cols-3 gap-2 sm:gap-4"
+            style={{ animationDelay: '270ms' }}
+          >
             {[
               { v: '25+', l: 'Years combined experience' },
               { v: `${new Date().getFullYear() - business.foundedYear}+`, l: 'Years in business' },
@@ -117,7 +129,10 @@ export default function HomePage() {
             ))}
           </dl>
 
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div
+            className="hero-in mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
+            style={{ animationDelay: '360ms' }}
+          >
             <CTAButton href="/contact" variant="primary" size="lg">
               Request Service
             </CTAButton>
@@ -135,14 +150,17 @@ export default function HomePage() {
       <section className="section bg-ink-50">
         <div className="container-page">
           <SectionHeading
+            className="reveal-heading"
             title="Our Services"
             eyebrow="“Watt” can we help you with?"
             subtitle="Residential and commercial electrical work across Champaign County — from a single ceiling fan to a full service upgrade."
           />
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredServices.map((service) => (
-              <ServiceCard key={service.slug} service={service} variant="tile" />
+            {featuredServices.map((service, i) => (
+              <Reveal key={service.slug} delay={i * 80} className="h-full">
+                <ServiceCard service={service} variant="tile" />
+              </Reveal>
             ))}
           </div>
 
@@ -163,9 +181,9 @@ export default function HomePage() {
             eyebrow="Ogden · Champaign · Urbana"
             subtitle={videos.brand.blurb}
           />
-          <div className="mx-auto mt-10 max-w-3xl">
+          <Reveal from="scale" className="mx-auto mt-10 max-w-3xl">
             <VideoEmbed video={videos.brand} />
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -178,7 +196,7 @@ export default function HomePage() {
       {/* ============ Guarantee / service promise ============ */}
       <section className="section bg-white">
         <div className="container-page">
-          <div className="mx-auto max-w-4xl rounded-lg border-2 border-dashed border-brand-300 bg-brand-50/50 p-7 sm:p-10">
+          <Reveal className="mx-auto max-w-4xl rounded-lg border-2 border-dashed border-brand-300 bg-brand-50/50 p-7 sm:p-10">
             <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-brand-600">
               Our service promise
             </p>
@@ -216,7 +234,7 @@ export default function HomePage() {
               client and replace this block. A quantified promise converts
               meaningfully better than a general one.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -230,8 +248,12 @@ export default function HomePage() {
           />
 
           <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
-            <LeadForm />
-            <ContactInfoCard />
+            <Reveal from="left">
+              <LeadForm />
+            </Reveal>
+            <Reveal from="right" delay={120}>
+              <ContactInfoCard />
+            </Reveal>
           </div>
         </div>
       </section>
@@ -273,9 +295,11 @@ export default function HomePage() {
           />
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.slice(0, 3).map((project) => (
-              <article
+            {projects.slice(0, 3).map((project, i) => (
+              <Reveal
+                as="article"
                 key={project.slug}
+                delay={i * 90}
                 className="overflow-hidden rounded-lg border border-ink-100 bg-white shadow-card"
               >
                 <ImageSlot
@@ -296,7 +320,7 @@ export default function HomePage() {
                     {project.blurb}
                   </p>
                 </div>
-              </article>
+              </Reveal>
             ))}
           </div>
 
@@ -317,12 +341,12 @@ export default function HomePage() {
             eyebrow="Serving Central Illinois since 2002"
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
-            {serviceAreas.map((area) => (
-              <Link
-                key={area.slug}
-                href={`/service-areas/${area.slug}`}
-                className="group rounded-lg border border-ink-100 bg-white p-6 shadow-card transition-all hover:-translate-y-1 hover:shadow-lift"
-              >
+            {serviceAreas.map((area, i) => (
+              <Reveal key={area.slug} delay={i * 90}>
+                <Link
+                  href={`/service-areas/${area.slug}`}
+                  className="group block h-full rounded-lg border border-ink-100 bg-white p-6 shadow-card transition-all hover:-translate-y-1 hover:shadow-lift"
+                >
                 <h3 className="font-display text-lg font-extrabold uppercase tracking-wider text-ink-900">
                   Electrician in {area.city}
                 </h3>
@@ -330,10 +354,11 @@ export default function HomePage() {
                   {area.intro}
                 </p>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-brand-600">
-                  {area.city} services
-                  <ArrowIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Link>
+                    {area.city} services
+                    <ArrowIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -343,9 +368,9 @@ export default function HomePage() {
       <section className="section bg-white">
         <div className="container-page">
           <SectionHeading title="Frequently asked" eyebrow="Straight answers" />
-          <div className="mt-12">
+          <Reveal className="mt-12">
             <FaqAccordion faqs={homeFaqs} />
-          </div>
+          </Reveal>
         </div>
       </section>
 

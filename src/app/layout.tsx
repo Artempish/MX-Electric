@@ -51,6 +51,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col">
+        {/* Marks the document as JS-capable before first paint. Scroll
+            reveal styles are gated on this, so without JavaScript every
+            section renders plainly visible instead of staying hidden. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
         <JsonLd data={[localBusinessSchema(), websiteSchema()]} />
 
         <a

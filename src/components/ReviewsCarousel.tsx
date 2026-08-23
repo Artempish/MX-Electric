@@ -20,8 +20,11 @@ export function ReviewsCarousel({
 }) {
   const trackRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
+  // Autoplay stops for good once the visitor takes control
+  const [paused, setPaused] = useState(false);
 
   const scrollToIndex = useCallback((index: number) => {
+    setPaused(true);
     const track = trackRef.current;
     if (!track) return;
     const item = track.children[index] as HTMLElement | undefined;
@@ -29,6 +32,36 @@ export function ReviewsCarousel({
       track.scrollTo({ left: item.offsetLeft - track.offsetLeft, behavior: 'smooth' });
     }
   }, []);
+
+  // Gentle autoplay. Pauses on hover, focus and touch, never runs for
+  // visitors who asked for reduced motion, and stops permanently once
+  // someone uses the dots or arrows.
+  useEffect(() => {
+    if (paused) return;
+    if (
+      typeof window === 'undefined' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setActive((current) => {
+        const next = (current + 1) % reviews.length;
+        const track = trackRef.current;
+        const item = track?.children[next] as HTMLElement | undefined;
+        if (track && item) {
+          track.scrollTo({
+            left: item.offsetLeft - track.offsetLeft,
+            behavior: 'smooth',
+          });
+        }
+        return next;
+      });
+    }, 6000);
+
+    return () => window.clearInterval(timer);
+  }, [paused, reviews.length]);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -54,7 +87,12 @@ export function ReviewsCarousel({
   const dark = tone === 'dark';
 
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onMouseEnter={() => setPaused(true)}
+      onFocusCapture={() => setPaused(true)}
+      onTouchStart={() => setPaused(true)}
+    >
       <ul
         ref={trackRef}
         className="-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden"

@@ -6,6 +6,7 @@ import { ReviewCard } from '@/components/ReviewCard';
 import { SectionHeading } from '@/components/SectionHeading';
 import { CTABand } from '@/components/CTABand';
 import { CTAButton } from '@/components/CTAButton';
+import { Reveal } from '@/components/Reveal';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema, reviewSchema } from '@/lib/schema';
 
@@ -42,8 +43,14 @@ export default function ReviewsPage() {
       <section className="section bg-ink-50">
         <div className="container-page">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {reviews.map((review) => (
-              <ReviewCard key={review.author + review.title} review={review} />
+            {reviews.map((review, i) => (
+              <Reveal
+                key={review.author + review.title}
+                delay={(i % 3) * 90}
+                className="h-full"
+              >
+                <ReviewCard review={review} />
+              </Reveal>
             ))}
           </div>
 

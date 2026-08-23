@@ -74,13 +74,16 @@ export function ProjectGallery({
       </ul>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => {
+        {projects.map((project, i) => {
           const visible = active === 'All' || project.category === active;
           return (
             <article
-              key={project.slug}
+              // Re-keying on the active filter replays the entrance
+              // animation for whichever cards are now showing.
+              key={`${active}-${project.slug}`}
               hidden={!visible}
-              className="flex flex-col overflow-hidden rounded-lg border border-ink-100 bg-white shadow-card transition-shadow hover:shadow-lift"
+              style={{ animationDelay: `${(i % 6) * 60}ms` }}
+              className="flex animate-fade-up flex-col overflow-hidden rounded-lg border border-ink-100 bg-white shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
             >
               {/* Before / after slots */}
               <div className="grid grid-cols-2 gap-px bg-ink-100">

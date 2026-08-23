@@ -27,7 +27,7 @@ export function Logo({
         <svg
           viewBox="0 0 24 24"
           aria-hidden
-          className="-mx-1 h-9 w-6 text-volt-400 sm:h-11 sm:w-7"
+          className="bolt-pulse -mx-1 h-9 w-6 text-volt-400 sm:h-11 sm:w-7"
           fill="currentColor"
         >
           <path d="M14.8 1 5 13.2h6.2L9.2 23 19 10.2h-6.2L14.8 1Z" />

@@ -15,7 +15,7 @@ type Props = {
 };
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-md font-bold uppercase tracking-wider transition-all duration-150 active:translate-y-px';
+  'inline-flex items-center justify-center gap-2 rounded-md font-bold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 motion-reduce:hover:translate-y-0';
 
 const variants: Record<Variant, string> = {
   primary: 'bg-brand-600 text-white shadow-lg shadow-brand-600/25 hover:bg-brand-700',

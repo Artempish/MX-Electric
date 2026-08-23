@@ -4,6 +4,7 @@ import { PageHero } from '@/components/PageHero';
 import { ServiceCard } from '@/components/ServiceCard';
 import { SectionHeading } from '@/components/SectionHeading';
 import { CTABand } from '@/components/CTABand';
+import { Reveal } from '@/components/Reveal';
 import { StatsBand } from '@/components/StatsBand';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
@@ -44,8 +45,10 @@ export default function ServicesPage() {
           />
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <ServiceCard key={service.slug} service={service} />
+            {services.map((service, i) => (
+              <Reveal key={service.slug} delay={(i % 3) * 80} className="h-full">
+                <ServiceCard service={service} />
+              </Reveal>
             ))}
           </div>
         </div>

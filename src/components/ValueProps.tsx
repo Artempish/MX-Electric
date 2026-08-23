@@ -2,6 +2,7 @@ import { differentiators } from '@/data/business';
 import { valueIcons } from '@/components/Icons';
 import { ImageSlot } from '@/components/ImageSlot';
 import { CTAButton } from '@/components/CTAButton';
+import { Reveal } from '@/components/Reveal';
 
 /**
  * "Why Choose Us" — four value-prop cards beside a supporting photo,
@@ -21,6 +22,7 @@ export function ValueProps() {
       <div className="container-page relative section">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           {/* Supporting photo */}
+          <Reveal from="left">
           <ImageSlot
             name="crew"
             label="[PLACEHOLDER: MX Electric crew member on site in Champaign IL — vertical photo]"
@@ -29,6 +31,7 @@ export function ValueProps() {
             sizes="(max-width: 1024px) 90vw, 45vw"
             className="mx-auto max-w-sm border-white/30 bg-white/10 text-white lg:max-w-none"
           />
+          </Reveal>
 
           <div>
             <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-volt-400">
@@ -39,10 +42,16 @@ export function ValueProps() {
             </h2>
 
             <ul className="mt-8 space-y-6">
-              {differentiators.map((item) => {
+              {differentiators.map((item, i) => {
                 const Icon = valueIcons[item.icon];
                 return (
-                  <li key={item.title} className="flex gap-4">
+                  <Reveal
+                    as="li"
+                    key={item.title}
+                    delay={i * 90}
+                    from="right"
+                    className="flex gap-4"
+                  >
                     <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-volt-400 text-ink-950">
                       <Icon className="h-6 w-6" />
                     </span>
@@ -54,7 +63,7 @@ export function ValueProps() {
                         {item.body}
                       </p>
                     </div>
-                  </li>
+                  </Reveal>
                 );
               })}
             </ul>

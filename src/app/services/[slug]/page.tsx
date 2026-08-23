@@ -11,6 +11,7 @@ import { FaqAccordion } from '@/components/FaqAccordion';
 import { LeadForm } from '@/components/LeadForm';
 import { CTABand } from '@/components/CTABand';
 import { ServiceCard } from '@/components/ServiceCard';
+import { Reveal } from '@/components/Reveal';
 import { JsonLd } from '@/components/JsonLd';
 import { CheckIcon, ServiceIcon } from '@/components/Icons';
 import { breadcrumbSchema, faqSchema, serviceSchema } from '@/lib/schema';
@@ -79,7 +80,7 @@ export default async function ServiceDetailPage({ params }: Params) {
             </div>
 
             {/* What's included */}
-            <div className="mt-10 rounded-lg border border-ink-100 bg-ink-50 p-6 sm:p-8">
+            <Reveal className="mt-10 rounded-lg border border-ink-100 bg-ink-50 p-6 sm:p-8">
               <h2 className="flex items-center gap-3 font-display text-xl font-extrabold uppercase tracking-wide text-ink-900">
                 <span className="text-brand-600">
                   <ServiceIcon icon={service.icon} className="h-7 w-7" />
@@ -94,10 +95,10 @@ export default async function ServiceDetailPage({ params }: Params) {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
 
             {service.signs ? (
-              <div className="mt-8 rounded-lg border-l-4 border-volt-400 bg-white p-6 shadow-card sm:p-8">
+              <Reveal className="mt-8 rounded-lg border-l-4 border-volt-400 bg-white p-6 shadow-card sm:p-8">
                 <h2 className="font-display text-xl font-extrabold uppercase tracking-wide text-ink-900">
                   {service.signs.title}
                 </h2>
@@ -112,7 +113,7 @@ export default async function ServiceDetailPage({ params }: Params) {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </Reveal>
             ) : null}
 
             {/* Local relevance */}
@@ -145,9 +146,9 @@ export default async function ServiceDetailPage({ params }: Params) {
       <section className="section bg-ink-50">
         <div className="container-page">
           <SectionHeading title="Frequently asked" eyebrow={service.name} />
-          <div className="mt-12">
+          <Reveal className="mt-12">
             <FaqAccordion faqs={service.faqs} />
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -155,8 +156,10 @@ export default async function ServiceDetailPage({ params }: Params) {
         <div className="container-page">
           <SectionHeading title="Other services" eyebrow="We also handle" />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((item) => (
-              <ServiceCard key={item.slug} service={item} variant="tile" />
+            {related.map((item, i) => (
+              <Reveal key={item.slug} delay={i * 80} className="h-full">
+                <ServiceCard service={item} variant="tile" />
+              </Reveal>
             ))}
           </div>
         </div>

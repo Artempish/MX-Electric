@@ -9,6 +9,7 @@ import { StatsBand } from '@/components/StatsBand';
 import { CTABand } from '@/components/CTABand';
 import { VideoEmbed } from '@/components/VideoEmbed';
 import { videos } from '@/data/videos';
+import { Reveal } from '@/components/Reveal';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
 
@@ -74,12 +75,14 @@ export default function AboutPage() {
             </div>
           </div>
 
+          <Reveal from="right">
           <ImageSlot
             name="team"
             label="[PLACEHOLDER: MX Electric team photo in front of the company van, Ogden IL]"
             aspect="aspect-[4/3]"
             sizes="(max-width: 1024px) 92vw, 46vw"
           />
+          </Reveal>
         </div>
       </section>
 
@@ -91,9 +94,9 @@ export default function AboutPage() {
             eyebrow="Ogden, Illinois"
             subtitle={videos.spotlight.blurb}
           />
-          <div className="mx-auto mt-10 max-w-3xl">
+          <Reveal from="scale" className="mx-auto mt-10 max-w-3xl">
             <VideoEmbed video={videos.spotlight} />
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -110,9 +113,11 @@ export default function AboutPage() {
           />
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((member) => (
-              <article
+            {team.map((member, i) => (
+              <Reveal
+                as="article"
                 key={member.name}
+                delay={i * 110}
                 className="overflow-hidden rounded-lg border border-ink-100 bg-white shadow-card"
               >
                 <ImageSlot
@@ -133,7 +138,7 @@ export default function AboutPage() {
                     {member.bio}
                   </p>
                 </div>
-              </article>
+              </Reveal>
             ))}
           </div>
 

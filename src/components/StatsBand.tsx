@@ -1,5 +1,7 @@
 import { stats } from '@/data/business';
 import { cn } from '@/lib/cn';
+import { CountUp } from '@/components/CountUp';
+import { Reveal } from '@/components/Reveal';
 
 /**
  * Full-bleed red band of headline numbers — the site's trust band.
@@ -22,12 +24,14 @@ export function StatsBand() {
         }}
       />
       <div className="container-page relative py-12 sm:py-14">
-        <h2 className="text-center font-display text-2xl font-extrabold uppercase tracking-wide text-white sm:text-3xl">
-          Why Champaign County calls MX Electric
-        </h2>
+        <Reveal>
+          <h2 className="text-center font-display text-2xl font-extrabold uppercase tracking-wide text-white sm:text-3xl">
+            Why Champaign County calls MX Electric
+          </h2>
+        </Reveal>
         <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
+          {stats.map((stat, i) => (
+            <Reveal key={stat.label} delay={i * 90} className="text-center">
               <dt className="sr-only">{stat.label}</dt>
               <dd>
                 <span
@@ -40,7 +44,7 @@ export function StatsBand() {
                       : 'text-3xl sm:text-4xl lg:text-5xl',
                   )}
                 >
-                  {stat.value}
+                  <CountUp value={stat.value} />
                 </span>
                 <span className="mt-2.5 block text-[11px] font-bold uppercase tracking-[0.16em] text-white sm:text-xs">
                   {stat.label}
@@ -49,7 +53,7 @@ export function StatsBand() {
                   {stat.note}
                 </span>
               </dd>
-            </div>
+            </Reveal>
           ))}
         </dl>
       </div>

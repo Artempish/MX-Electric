@@ -25,8 +25,12 @@ export function FaqAccordion({
               <path d="m6 9 6 6 6-6" />
             </svg>
           </summary>
-          <div className="px-5 pb-5 text-[15px] leading-relaxed text-ink-600 sm:px-6">
-            {faq.a}
+          <div className="faq-panel">
+            <div>
+              <p className="px-5 pb-5 text-[15px] leading-relaxed text-ink-600 sm:px-6">
+                {faq.a}
+              </p>
+            </div>
           </div>
         </details>
       ))}
