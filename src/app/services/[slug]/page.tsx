@@ -5,7 +5,7 @@ import { services, getService } from '@/data/services';
 import { serviceAreas } from '@/data/serviceAreas';
 import { business } from '@/data/business';
 import { PageHero } from '@/components/PageHero';
-import { PlaceholderImage } from '@/components/PlaceholderImage';
+import { ImageSlot } from '@/components/ImageSlot';
 import { SectionHeading } from '@/components/SectionHeading';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { LeadForm } from '@/components/LeadForm';
@@ -65,7 +65,12 @@ export default async function ServiceDetailPage({ params }: Params) {
       <section className="section bg-white">
         <div className="container-page grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-14">
           <div>
-            <PlaceholderImage label={service.hero.imageAlt} aspect="aspect-[16/9]" />
+            <ImageSlot
+              name={`services/${service.slug}`}
+              label={service.hero.imageAlt}
+              aspect="aspect-[16/9]"
+              sizes="(max-width: 1024px) 92vw, 60vw"
+            />
 
             <div className="prose-copy mt-9">
               {service.body.map((paragraph) => (

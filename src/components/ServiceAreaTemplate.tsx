@@ -3,7 +3,7 @@ import type { ServiceArea } from '@/data/serviceAreas';
 import { services } from '@/data/services';
 import { business } from '@/data/business';
 import { PageHero } from '@/components/PageHero';
-import { PlaceholderImage } from '@/components/PlaceholderImage';
+import { ImageSlot } from '@/components/ImageSlot';
 import { SectionHeading } from '@/components/SectionHeading';
 import { ServiceCard } from '@/components/ServiceCard';
 import { LeadForm } from '@/components/LeadForm';
@@ -42,9 +42,11 @@ export function ServiceAreaTemplate({ area }: { area: ServiceArea }) {
       <section className="section bg-white">
         <div className="container-page grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-14">
           <div>
-            <PlaceholderImage
+            <ImageSlot
+              name={`areas/${area.slug}`}
               label={`[PLACEHOLDER: MX Electric working at a ${area.city}, ${area.state} property]`}
               aspect="aspect-[16/9]"
+              sizes="(max-width: 1024px) 92vw, 60vw"
             />
 
             <div className="prose-copy mt-9">

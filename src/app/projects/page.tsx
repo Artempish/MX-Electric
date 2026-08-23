@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { projects, projectCategories } from '@/data/projects';
+import { projectAssets } from '@/lib/media';
 import { PageHero } from '@/components/PageHero';
 import { ProjectGallery } from '@/components/ProjectGallery';
 import { SectionHeading } from '@/components/SectionHeading';
@@ -15,6 +16,13 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
+  // Image URLs are resolved here, on the server, and handed to the
+  // client-side filter component.
+  const gallery = projects.map((project) => {
+    const { before, after } = projectAssets(project.slug);
+    return { ...project, beforeSrc: before, afterSrc: after };
+  });
+
   return (
     <>
       <JsonLd
@@ -52,7 +60,7 @@ export default function ProjectsPage() {
           </p>
 
           <div className="mt-12">
-            <ProjectGallery projects={projects} categories={projectCategories} />
+            <ProjectGallery projects={gallery} categories={projectCategories} />
           </div>
         </div>
       </section>

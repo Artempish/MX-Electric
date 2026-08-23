@@ -1,6 +1,6 @@
 import { differentiators } from '@/data/business';
 import { valueIcons } from '@/components/Icons';
-import { PlaceholderImage } from '@/components/PlaceholderImage';
+import { ImageSlot } from '@/components/ImageSlot';
 import { CTAButton } from '@/components/CTAButton';
 
 /**
@@ -21,10 +21,12 @@ export function ValueProps() {
       <div className="container-page relative section">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           {/* Supporting photo */}
-          <PlaceholderImage
-            label="[PLACEHOLDER: MX Electric crew member on site in Champaign IL — hero-quality vertical photo]"
+          <ImageSlot
+            name="crew"
+            label="[PLACEHOLDER: MX Electric crew member on site in Champaign IL — vertical photo]"
             aspect="aspect-[4/5]"
             tone="dark"
+            sizes="(max-width: 1024px) 90vw, 45vw"
             className="mx-auto max-w-sm border-white/30 bg-white/10 text-white lg:max-w-none"
           />
 

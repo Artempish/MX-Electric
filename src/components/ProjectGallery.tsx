@@ -1,9 +1,39 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import type { Project } from '@/data/projects';
 import { PlaceholderImage } from '@/components/PlaceholderImage';
 import { cn } from '@/lib/cn';
+
+/**
+ * A project plus its before/after image URLs, resolved on the server
+ * (this component is a client component and cannot touch the
+ * filesystem). Either URL may be null until the photo is supplied.
+ */
+export type GalleryProject = Project & {
+  beforeSrc: string | null;
+  afterSrc: string | null;
+};
+
+function Shot({ src, label }: { src: string | null; label: string }) {
+  if (!src) {
+    return (
+      <PlaceholderImage label={label} aspect="aspect-[4/3]" rounded="rounded-none" />
+    );
+  }
+  return (
+    <div className="relative aspect-[4/3] w-full overflow-hidden">
+      <Image
+        src={src}
+        alt={label.replace(/^\[PLACEHOLDER:\s*/i, '').replace(/\]$/, '')}
+        fill
+        sizes="(max-width: 640px) 50vw, 20vw"
+        className="object-cover"
+      />
+    </div>
+  );
+}
 
 /**
  * Filterable recent-work grid. All projects render on the server; the
@@ -14,7 +44,7 @@ export function ProjectGallery({
   projects,
   categories,
 }: {
-  projects: Project[];
+  projects: GalleryProject[];
   categories: string[];
 }) {
   const [active, setActive] = useState('All');
@@ -54,16 +84,8 @@ export function ProjectGallery({
             >
               {/* Before / after slots */}
               <div className="grid grid-cols-2 gap-px bg-ink-100">
-                <PlaceholderImage
-                  label={project.beforeAlt}
-                  aspect="aspect-[4/3]"
-                  rounded="rounded-none"
-                />
-                <PlaceholderImage
-                  label={project.afterAlt}
-                  aspect="aspect-[4/3]"
-                  rounded="rounded-none"
-                />
+                <Shot src={project.beforeSrc} label={project.beforeAlt} />
+                <Shot src={project.afterSrc} label={project.afterAlt} />
               </div>
 
               <div className="flex flex-1 flex-col p-5">

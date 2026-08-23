@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { business } from '@/data/business';
 import { team } from '@/data/team';
 import { PageHero } from '@/components/PageHero';
-import { PlaceholderImage } from '@/components/PlaceholderImage';
+import { ImageSlot } from '@/components/ImageSlot';
 import { SectionHeading } from '@/components/SectionHeading';
 import { ValueProps } from '@/components/ValueProps';
 import { StatsBand } from '@/components/StatsBand';
@@ -72,9 +72,11 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <PlaceholderImage
+          <ImageSlot
+            name="team"
             label="[PLACEHOLDER: MX Electric team photo in front of the company van, Ogden IL]"
             aspect="aspect-[4/3]"
+            sizes="(max-width: 1024px) 92vw, 46vw"
           />
         </div>
       </section>
@@ -97,10 +99,12 @@ export default function AboutPage() {
                 key={member.name}
                 className="overflow-hidden rounded-lg border border-ink-100 bg-white shadow-card"
               >
-                <PlaceholderImage
+                <ImageSlot
+                  name={`team/${member.slug}`}
                   label={member.photoAlt}
                   aspect="aspect-[4/5]"
                   rounded="rounded-none"
+                  sizes="(max-width: 640px) 100vw, 33vw"
                 />
                 <div className="p-6">
                   <h3 className="font-display text-lg font-extrabold uppercase tracking-wider text-ink-900">

@@ -9,6 +9,23 @@ aspect ratio the final photo should occupy.
 Nothing was taken from mxelectric.net, miamielectricwizards.com, or any other
 live business's website. Those images are copyrighted and cannot be reused.
 
+## Where files go
+
+Filenames are fixed — see the table in `README.md`. Drop a correctly-named file
+into `public/images/` and the slot fills itself; no code changes needed.
+
+```
+public/images/
+  hero.jpg                    homepage hero background
+  crew.jpg                    "take charge" band
+  team.jpg                    about page team photo
+  team/<slug>.jpg             headshots
+  services/<slug>.jpg         one per service page
+  areas/<slug>.jpg            champaign / urbana / ogden
+  projects/<slug>-before.jpg  gallery, before
+  projects/<slug>-after.jpg   gallery, after
+```
+
 ## When real images are added
 
 Record every image here before it goes live:
@@ -28,8 +45,15 @@ Record every image here before it goes live:
 
    | `public/images/hero.jpg` | Electrician working in a panel | Unsplash — Jane Doe, https://unsplash.com/photos/xxxxxxx | Unsplash License | Credit appreciated, not required |
 
-3. **Never** use images scraped from a competitor's or any other business's
-   website, from Google Images, or from a social media profile.
+3. **Photos from the old mxelectric.net site**: photographs MX Electric took
+   themselves are theirs to move over. Licensed stock photography on that site
+   usually is not — the license typically sits with the previous web vendor or
+   is scoped to that site alone. Check the origin of each image before
+   republishing it and record the answer in the table above. When the origin
+   cannot be established, commission or license a replacement rather than
+   guessing.
+4. **Never** use images taken from a competitor's website, from Google Images,
+   or from a social media profile.
 4. Optimize before committing: export at a sensible size, prefer WebP/AVIF, and
    render through `next/image` so Next.js can serve responsive variants.
 

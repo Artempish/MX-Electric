@@ -14,8 +14,10 @@ import { StatsBand } from '@/components/StatsBand';
 import { ValueProps } from '@/components/ValueProps';
 import { SectionHeading } from '@/components/SectionHeading';
 import { TrustChips } from '@/components/TrustChips';
-import { PlaceholderImage } from '@/components/PlaceholderImage';
+import { ImageSlot } from '@/components/ImageSlot';
 import { FaqAccordion } from '@/components/FaqAccordion';
+import { VideoEmbed } from '@/components/VideoEmbed';
+import { videos } from '@/data/videos';
 import { JsonLd } from '@/components/JsonLd';
 import { faqSchema, reviewSchema } from '@/lib/schema';
 import { PhoneIcon, ArrowIcon, CheckIcon } from '@/components/Icons';
@@ -59,13 +61,16 @@ export default function HomePage() {
       <section className="relative isolate overflow-hidden bg-ink-950">
         {/* Full-width background image/video slot */}
         <div className="absolute inset-0 -z-10">
-          <PlaceholderImage
-            label="[PLACEHOLDER: full-width hero image or looping video — MX Electric van and crew outside a Champaign home]"
-            aspect="aspect-auto"
+          <ImageSlot
+            name="hero"
+            label="[PLACEHOLDER: full-width hero image — MX Electric van and crew outside a Champaign home]"
             tone="dark"
             rounded="rounded-none"
             labelPosition="bottom"
-            className="h-full border-0 bg-ink-900 opacity-60"
+            fillParent
+            priority
+            sizes="100vw"
+            className="border-0 bg-ink-900 opacity-60"
           />
           <div
             aria-hidden
@@ -146,6 +151,20 @@ export default function HomePage() {
               More electrical services
               <ArrowIcon className="h-4 w-4" />
             </CTAButton>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ Brand video ============ */}
+      <section className="section bg-white">
+        <div className="container-page">
+          <SectionHeading
+            title={videos.brand.title}
+            eyebrow="Ogden · Champaign · Urbana"
+            subtitle={videos.brand.blurb}
+          />
+          <div className="mx-auto mt-10 max-w-3xl">
+            <VideoEmbed video={videos.brand} />
           </div>
         </div>
       </section>
@@ -259,10 +278,12 @@ export default function HomePage() {
                 key={project.slug}
                 className="overflow-hidden rounded-lg border border-ink-100 bg-white shadow-card"
               >
-                <PlaceholderImage
+                <ImageSlot
+                  name={`projects/${project.slug}-after`}
                   label={project.afterAlt}
                   aspect="aspect-[4/3]"
                   rounded="rounded-none"
+                  sizes="(max-width: 640px) 100vw, 33vw"
                 />
                 <div className="p-5">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-brand-600">

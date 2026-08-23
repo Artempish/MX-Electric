@@ -163,27 +163,59 @@ Everything below is a deliberate placeholder. Search the codebase for
 
 ## Photography (all of it)
 
-**No images are included.** Every image slot is a `<PlaceholderImage />` — a
-labeled gray box sized to its final aspect ratio, so dropping in real photos
-will not shift the layout. No imagery was taken from mxelectric.net or any
-other business's site; those images are copyrighted.
+**No images are included.** Every image slot is an `<ImageSlot />` that looks
+for a file in `/public/images` and falls back to a labeled placeholder box at
+the same aspect ratio when the file is missing.
 
-Slots that need real photos:
+**To publish a photo, drop it in with the right filename — that is the whole
+process.** No component edits, no broken images in between, and no layout shift
+when it appears, because the slot was already sized.
 
-| Location | Slot |
-| --- | --- |
-| Homepage hero | Full-width background image or looping video — van and crew outside a Champaign home |
-| "Why choose us" band | Vertical portrait of a crew member on site |
-| About page | Team photo in front of the company van |
-| About page | Three headshots — Max Painter, Scott Lamb, Dan Goyne |
-| Each service page | One wide photo of that service being performed |
-| Projects gallery | Before **and** after photo for each of the nine entries |
-| Each service-area page | One local job photo |
-| Header / footer | Real MX Electric logo file (SVG preferred) — currently a typographic stand-in in `src/components/Logo.tsx` |
+| File to add (under `public/images/`) | Slot it fills | Ratio |
+| --- | --- | --- |
+| `hero.jpg` | Homepage hero background | wide, 1920px+ |
+| `crew.jpg` | "Let MX Electric take charge" band | 4:5 |
+| `team.jpg` | About page team photo | 4:3 |
+| `team/max-painter.jpg` | Headshot — Max Painter | 4:5 |
+| `team/scott-lamb.jpg` | Headshot — Scott Lamb | 4:5 |
+| `team/dan-goyne.jpg` | Headshot — Dan Goyne | 4:5 |
+| `services/<slug>.jpg` | Service page hero — one per service | 16:9 |
+| `areas/<slug>.jpg` | Service area page — champaign, urbana, ogden | 16:9 |
+| `projects/<slug>-before.jpg` | Projects gallery, before shot | 4:3 |
+| `projects/<slug>-after.jpg` | Projects gallery, after shot | 4:3 |
 
-Get written permission from homeowners before publishing photos of their
-property. If licensed stock is used as a first pass, record the source in
-`IMAGE-CREDITS.md`.
+Service slugs: `panel-upgrades`, `generators`, `remodels-rewires`,
+`ceiling-fans`, `ev-chargers`, `lighting`, `new-construction`,
+`knob-and-tube-removal`, `efficiency-consultations`. Project slugs are in
+`src/data/projects.ts`.
+
+`.avif`, `.webp`, `.jpg`, `.jpeg` and `.png` are all recognized (in that order
+of preference). Everything renders through `next/image`, so responsive variants
+are generated automatically.
+
+The logo is still a typographic stand-in in `src/components/Logo.tsx` — replace
+it with the real logo file when supplied. The favicon is `src/app/icon.svg`.
+
+### A caution on reusing photos from the old site
+
+Photos that MX Electric took themselves — real job sites, the crew, the van —
+are theirs to move onto the new site freely. But a typical contractor site also
+carries **licensed stock photography**, and that license usually belongs to the
+web vendor or is tied to the old site specifically. The model-in-overalls type
+of image is almost always stock. Carrying those across without checking the
+license can mean a bill from the stock agency, so confirm the origin of each
+image before republishing it, and record what you find in `IMAGE-CREDITS.md`.
+
+## Video
+
+`src/data/videos.ts` holds the YouTube video IDs. The homepage embeds one
+through `<VideoEmbed />`, a click-to-load facade: nothing is requested from
+YouTube until the visitor presses play, so there is no third-party script on
+first paint and no cookies for people who never watch. The poster is drawn
+locally, so the panel costs zero network requests at rest.
+
+The title and caption in `videos.ts` are marked `[PLACEHOLDER]` — they were set
+without being able to view the video, so confirm them.
 
 ## Business facts to confirm
 
