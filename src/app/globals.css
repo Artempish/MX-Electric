@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --header-height: 4rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Keeps anchor targets clear of the sticky header */
+    scroll-padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  body {
+    @apply bg-white text-ink-800 antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-volt-300 text-ink-950;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink-900;
+    text-wrap: balance;
+  }
+
+  /* Visible, on-brand focus ring everywhere */
+  :focus-visible {
+    @apply outline-none ring-2 ring-volt-400 ring-offset-2 ring-offset-white;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-container px-5 sm:px-6 lg:px-8;
+  }
+
+  /* Section rhythm — generous whitespace, tightened on mobile */
+  .section {
+    @apply py-14 sm:py-20 lg:py-24;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-volt-600;
+  }
+
+  .eyebrow-on-dark {
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-volt-300;
+  }
+
+  .heading-xl {
+    @apply text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl;
+  }
+
+  .heading-lg {
+    @apply text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl;
+  }
+
+  .heading-md {
+    @apply text-2xl font-bold leading-tight tracking-tight sm:text-3xl;
+  }
+
+  .body-lg {
+    @apply text-base leading-relaxed sm:text-lg;
+  }
+
+  .card {
+    @apply rounded-2xl border border-ink-100 bg-white shadow-card;
+  }
+
+  .prose-copy p {
+    @apply mb-4 text-base leading-relaxed text-ink-600 sm:text-lg;
+  }
+
+  .prose-copy p:last-child {
+    @apply mb-0;
+  }
+}
