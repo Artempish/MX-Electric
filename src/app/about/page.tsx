@@ -7,6 +7,8 @@ import { SectionHeading } from '@/components/SectionHeading';
 import { ValueProps } from '@/components/ValueProps';
 import { StatsBand } from '@/components/StatsBand';
 import { CTABand } from '@/components/CTABand';
+import { VideoEmbed } from '@/components/VideoEmbed';
+import { videos } from '@/data/videos';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
 
@@ -78,6 +80,20 @@ export default function AboutPage() {
             aspect="aspect-[4/3]"
             sizes="(max-width: 1024px) 92vw, 46vw"
           />
+        </div>
+      </section>
+
+      {/* Company video */}
+      <section className="section bg-ink-50">
+        <div className="container-page">
+          <SectionHeading
+            title={videos.spotlight.title}
+            eyebrow="Ogden, Illinois"
+            subtitle={videos.spotlight.blurb}
+          />
+          <div className="mx-auto mt-10 max-w-3xl">
+            <VideoEmbed video={videos.spotlight} />
+          </div>
         </div>
       </section>
 

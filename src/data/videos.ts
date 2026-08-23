@@ -21,4 +21,10 @@ export const videos = {
     blurb:
       '[PLACEHOLDER — confirm caption] A look at who we are and how we work across Champaign County.',
   },
+  spotlight: {
+    id: 'RorN8o_WaAI',
+    title: 'MX Electric in the community',
+    blurb:
+      '[PLACEHOLDER — confirm caption] A closer look at the company and the people behind it.',
+  },
 } satisfies Record<string, Video>;
